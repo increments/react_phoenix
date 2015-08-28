@@ -8,7 +8,7 @@ defmodule ReactPhoenixTest do
     use Phoenix.HTML
   end
 
-  test "render a haml template with layout" do
+  test "render a jsx template with layout" do
     html = View.render(MyApp.PageView, "new.html",
       message: "hi",
       layout: {MyApp.PageView, "application.html"}
@@ -16,7 +16,7 @@ defmodule ReactPhoenixTest do
     assert html == {:safe, [[["" | "<html><body>"], "" | "<h2>New Template</h2>"] | "</body></html>"]}
   end
 
-  test "render a haml template without layout" do
+  test "render a jsx template without layout" do
     html = View.render(MyApp.PageView, "new.html", [])
     assert html == {:safe, ["" | "<h2>New Template</h2>"]}
   end
