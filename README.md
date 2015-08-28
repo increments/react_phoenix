@@ -1,16 +1,25 @@
-# Phoenix Template Engine for Haml
+# Phoenix Template Engine for React
 
-> Powered by [Calliope](https://github.com/nurugger07/calliope)
+Inspired by [reactjs/react-rails](https://github.com/reactjs/react-rails "reactjs/react-rails")
+
+WIP: It is not ready to prerender in server side because of [this issue](https://github.com/strange/erlang-v8/issues/1 "Build failed on Mac · Issue #1 · strange/erlang-v8"). Now it only provides `react_component` utils.
 
 ## Usage
 
-  1. Add `{:react_phoenix, "~> 0.1.1"}` to your deps in `mix.exs`.
-     If you generated your app from the Phoenix master branch,
-     add react_phoenix's master branch to your deps instead.
-     `{:react_phoenix, github: "chrismccord/react_phoenix"}`
-  2. Add the following your Phoenix `config/config.exs`
+1. Add `{:react_phoenix, github: "mizchi/react_phoenix"}` to your deps in `mix.exs`.
+2. Import `ReactPhoenix.Utils` and call `react_component`
 
-```elixir
-  config :phoenix, :template_engines,
-    haml: ReactPhoenix.Engine
+page_view.ex
+
+```
+defmodule YourApp.PageView do
+  use HelloPhoenix.Web, :view
+  import ReactPhoenix.Utils
+end
+```
+
+page.eex
+
+```
+<%- raw react_component("HelloComponent", %{propA: 1, propB: 2}, %{prerender: false}) %>
 ```
