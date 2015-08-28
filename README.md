@@ -22,4 +22,21 @@ page.eex
 
 ```
 <%- raw react_component("HelloComponent", %{propA: 1, propB: 2}, %{prerender: false}) %>
+# => <div data-react-class="Hello" data-react-props='{\"a\":1}'></div>
 ```
+
+## Client Side Rendering with react-ssr-mounter
+
+```
+npm install @mizchi/react-ssr-mounter --save
+```
+
+```js
+window.Hello = React.createClass({
+  render(){return <div><h1>hello</h1></div>;}
+});
+
+let {initComponents} = require('@mizchi/react-ssr-mounter');
+window.addEventListener("load", () => {
+  var components = initComponents();
+});
