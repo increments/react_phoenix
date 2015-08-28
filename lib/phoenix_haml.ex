@@ -1,2 +1,2 @@
-defmodule PhoenixHaml do
+defmodule ReactPhoenix do
 end

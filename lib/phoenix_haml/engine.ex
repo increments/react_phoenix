@@ -1,4 +1,4 @@
-defmodule PhoenixHaml.Engine do
+defmodule ReactPhoenix.Engine do
   @behaviour Phoenix.Template.Engine
 
   @doc """

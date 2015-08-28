@@ -1,4 +1,4 @@
-defmodule PhoenixHamlTest do
+defmodule ReactPhoenixTest do
   use ExUnit.Case
   alias Phoenix.View
 
