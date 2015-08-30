@@ -1,4 +1,1 @@
-%html
-  %body
-    = @inner
-
+React.renderToStaticMarkup(React.createElement('div', {}, 'foo'))
