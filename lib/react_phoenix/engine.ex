@@ -3,7 +3,8 @@ defmodule ReactPhoenix.Engine do
 
   def compile(path, _name) do
     {:ok, html} = path |> read! |> ReactPhoenix.Renderer.render
-    {:ok, {:safe, html}}
+    # {:ok, {:safe, (to_char_list html)}}
+    {:safe, html}
     # {:ok, html} = ReactPhoenix.Renderer.render(path |> read!)
       # |> EEx.compile_string(engine: Phoenix.HTML.Engine, file: path, line: 1)
     # {:ok, {:safe, html}}
