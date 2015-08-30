@@ -19,7 +19,10 @@ defmodule ReactPhoenix.Mixfile do
   end
 
   def application do
-    [applications: [:phoenix, :exjsx]]
+    [
+      applications: [:phoenix, :exjsx, :erlang_v8],
+      mod: {ReactPhoenix, []}
+    ]
   end
 
   defp deps do
@@ -27,6 +30,7 @@ defmodule ReactPhoenix.Mixfile do
       {:phoenix, "~> 0.17"},
       {:phoenix_html, "~> 2.1"},
       {:exjsx, "~> 3.2.0"},
+      {:erlang_v8, github: "babie/erlang-v8", branch: "fix_make_error", compile: "make"},
       {:cowboy, "~> 1.0.0", only: [:dev, :test]}
     ]
   end

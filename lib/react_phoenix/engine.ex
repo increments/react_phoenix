@@ -6,6 +6,6 @@ defmodule ReactPhoenix.Engine do
   end
 
   defp read!(file_path) do
-    file_path |> File.read! # |> Calliope.Render.precompile
+    file_path |> File.read!
   end
 end

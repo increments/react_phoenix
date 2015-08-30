@@ -7,6 +7,16 @@ defmodule ReactPhoenixTest do
     assert html == "<div data-react-class=\'Hello\' data-react-props=\'{\"a\":1}\' ></div>"
   end
 
+  test "JSContext.eval evals javascript" do
+    {:ok, result} = ReactPhoenix.JSContext.eval "React.renderToStaticMarkup(React.createElement('div', {}))"
+    assert result == "<div></div>"
+  end
+
+  test "Renderer returns result" do
+    {:ok, result} = ReactPhoenix.Renderer.render "React.renderToStaticMarkup(React.createElement('div', {}, 'foo'))"
+    assert result == "<div>foo</div>"
+  end
+
   # defmodule MyApp.PageView do
   #   use Phoenix.View, root: "test/fixtures/templates"
   #   use Phoenix.HTML
