@@ -1,29 +1,38 @@
-defmodule ReactPhoenixTest do
+defmodule ReactPhoenixTest.Renderer do
   use ExUnit.Case
   alias Phoenix.View
-
-  test "react_component should render wrapper" do
-    html = ReactPhoenix.Utils.react_component "Hello", %{a: 1}, %{prerender: false}
-    assert html == "<div data-react-class=\'Hello\' data-react-props=\'{\"a\":1}\' ></div>"
-  end
-
-  test "JSContext.eval evals javascript" do
-    {:ok, result} = ReactPhoenix.JSContext.eval "React.renderToStaticMarkup(React.createElement('div', {}))"
-    assert result == "<div></div>"
-  end
-
   test "Renderer returns result" do
     {:ok, result} = ReactPhoenix.Renderer.render "React.renderToStaticMarkup(React.createElement('div', {}, 'foo'))"
     assert result == "<div>foo</div>"
   end
+end
+
+defmodule ReactPhoenixTest.Utils do
+  use ExUnit.Case
+  alias Phoenix.View
+  import ReactPhoenix.Utils
+  defmodule MyApp.PageView do
+    use Phoenix.View, root: "test/fixtures/templates"
+    use Phoenix.HTML
+    import ReactPhoenix.Utils
+  end
+
+  test "react_component should render wrapper" do
+    html = react_component "Hello", %{a: 1}, %{prerender: false}
+    assert html == "<div data-react-class=\'Hello\' data-react-props=\'{\"a\":1}\' ></div>"
+  end
+end
+
+defmodule ReactPhoenixTest do
+  # Engine
+  use ExUnit.Case
+  alias Phoenix.View
+  import ReactPhoenix.Utils
 
   defmodule MyApp.PageView do
     use Phoenix.View, root: "test/fixtures/templates"
     use Phoenix.HTML
-
-    def to_json do
-      JSX.encode %{a: 1}
-    end
+    import ReactPhoenix.Utils
   end
 
   test "render a js template without layout" do
@@ -31,11 +40,9 @@ defmodule ReactPhoenixTest do
     assert html == {:safe, "<div>foo</div>"}
   end
 
-  # test "render a js template with layout" do
-  #   html = View.render(MyApp.PageView, "new.html",
-  #     message: "hi",
-  #     layout: {MyApp.PageView, "application.html"}
-  #   )
-  #   assert html == {:safe, [[["" | "<html><body>"], "" | "<h2>New Template</h2>"] | "</body></html>"]}
-  # end
+  test "render a js template with layout" do
+    html = View.render(MyApp.PageView, "new.html",
+      layout: {MyApp.PageView, "application.html"}
+    )
+  end
 end
