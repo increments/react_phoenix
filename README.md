@@ -1,5 +1,7 @@
 # Phoenix Template Engine for React
 
+Server side react rendering on Phoenix.
+
 Inspired by [reactjs/react-rails](https://github.com/reactjs/react-rails "reactjs/react-rails")
 
 ## Usage
@@ -9,7 +11,7 @@ Inspired by [reactjs/react-rails](https://github.com/reactjs/react-rails "reactj
 
 page_view.ex
 
-```
+```elixir
 defmodule YourApp.PageView do
   use HelloPhoenix.Web, :view
   import ReactPhoenix.Utils
@@ -28,11 +30,12 @@ page.eex
 if react_compoent's option, `prerender: true`, ReactPhoenix compiles react component in server side.
 
 ```elixir
+# Eval javascript at application boot
 ReactPhoenix.JSContext.load_javascript """
   var Hello = React.createClass({render: function(){return React.createElement('div', {}, "hello")}})
 """
 
-# or
+# or load_file
 
 ReactPhoenix.JSContext.load_file "components.js" # expect precompiled javascripts
 
@@ -50,20 +53,25 @@ npm install @mizchi/react-ssr-mounter --save
 ```
 
 ```js
+let {initComponents} = require('@mizchi/react-ssr-mounter');
+
+// register save reference name with server side resolver.
 window.Hello = React.createClass({
   render(){return <div><h1>hello</h1></div>;}
 });
 
-let {initComponents} = require('@mizchi/react-ssr-mounter');
 window.addEventListener("load", () => {
   var components = initComponents();
 });
 ```
 
+You can take over server side state if it can.
+
 ## TODO
 
 - [x] react_compoent prerender: false
 - [x] react_compoent prerender: true
+- [ ] Add an example
 - [ ] Use v8 context pool
 - [ ] .js renderer
 - [ ] .jsx renderer
