@@ -25,7 +25,7 @@ defmodule ReactPhoenixTest do
     {:safe, data} = View.render(MyApp.PageView, "util.html",
       layout: {MyApp.PageView, "application.html"}
     )
-    assert (to_string data) == "<html>\n<div>\n  <div data-react-class='Hello' data-react-props='{\"a\":1}' ></div>\n</div>\n\n</html>\n"
+    assert (to_string data) == "<html>\n<div>\n  <div data-react-class='Hello' data-react-props='{\"a\":1}'></div>\n</div>\n\n</html>\n"
   end
 
   test "render as prerender: true" do

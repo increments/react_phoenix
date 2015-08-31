@@ -9,7 +9,7 @@ defmodule ReactPhoenixTest.Utils do
 
   test "react_component should render wrapper with prerender: false" do
     html = react_component "Hello", %{a: 1}, prerender: false
-    assert (to_string html) == "<div data-react-class=\'Hello\' data-react-props=\'{\"a\":1}\' ></div>"
+    assert (to_string html) == "<div data-react-class=\'Hello\' data-react-props=\'{\"a\":1}\'></div>"
   end
 
   test "react_component should render content with prerender: true" do

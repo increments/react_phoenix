@@ -5,13 +5,13 @@ defmodule ReactPhoenix.Utils do
 
   def react_component(name, props, opts) do
     {:ok, strProps} = JSX.encode props
+    embeddedAttrs = "data-react-class=\'#{name}\' data-react-props=\'#{strProps}\'"
 
-    "<div data-react-class=\'#{name}\' data-react-props=\'#{strProps}\' >"
-    <> (if opts[:prerender] do
-        ReactPhoenix.Renderer.render_component(name, props)
-      else
-        ""
-      end)
-    <> "</div>"
+    if opts[:prerender] do
+      html = ReactPhoenix.Renderer.render_component(name, props)
+      Regex.replace ~r/^(\<(\w+)\s)/, html, "\\0#{embeddedAttrs} "
+    else
+      "<div #{embeddedAttrs}></div>"
+    end
   end
 end
