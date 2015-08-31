@@ -2,18 +2,6 @@
 
 Inspired by [reactjs/react-rails](https://github.com/reactjs/react-rails "reactjs/react-rails")
 
-WIP: It is not ready to prerender in server side because of [this issue](https://github.com/strange/erlang-v8/issues/1 "Build failed on Mac · Issue #1 · strange/erlang-v8"). Now it only provides `react_component` utils.
-
-## TODO
-
-- [x] react_compoent prerender: false
-- [x] react_compoent
-- [ ] .js renderer
-- [ ] .jsx renderer
-- [ ] .jade renderer
-- [ ] Cache by filename
-- [ ] Reload renderer when template file changes
-
 ## Usage
 
 1. Add `{:react_phoenix, github: "mizchi/react_phoenix"}` to your deps in `mix.exs`.
@@ -30,12 +18,32 @@ end
 
 page.eex
 
-```
-<%- raw react_component("HelloComponent", %{propA: 1, propB: 2}, %{prerender: false}) %>
+```elixir
+<%= react_component("HelloComponent", %{propA: 1, propB: 2}) %>
 # => <div data-react-class="Hello" data-react-props='{\"a\":1}'></div>
 ```
 
-## Client Side Rendering with react-ssr-mounter
+## Prerender
+
+if react_compoent's option, `prerender: true`, ReactPhoenix compiles react component in server side.
+
+```elixir
+ReactPhoenix.JSContext.load_javascript """
+  var Hello = React.createClass({render: function(){return React.createElement('div', {}, "hello")}})
+"""
+
+# or
+
+ReactPhoenix.JSContext.load_file "components.js" # expect precompiled javascripts
+
+...
+
+```elixir
+<%= react_component("Hello", %{}, prerender: true) %>
+# => <div data-react-class="Hello" data-react-props='{}'>hello</div>
+```
+
+## Optional: Client Side Rendering with react-ssr-mounter
 
 ```
 npm install @mizchi/react-ssr-mounter --save
@@ -50,3 +58,15 @@ let {initComponents} = require('@mizchi/react-ssr-mounter');
 window.addEventListener("load", () => {
   var components = initComponents();
 });
+```
+
+## TODO
+
+- [x] react_compoent prerender: false
+- [x] react_compoent prerender: true
+- [ ] Use v8 context pool
+- [ ] .js renderer
+- [ ] .jsx renderer
+- [ ] .jade renderer for react-jade
+- [ ] Cache by filename
+- [ ] Reload renderer when template files change

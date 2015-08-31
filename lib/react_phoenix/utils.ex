@@ -9,9 +9,9 @@ defmodule ReactPhoenix.Utils do
 
     if opts[:prerender] do
       html = ReactPhoenix.Renderer.render_component(name, props)
-      Regex.replace ~r/^(\<(\w+)\s)/, html, "\\0#{embeddedAttrs} "
+      {:safe, Regex.replace(~r/^(\<(\w+)\s)/, html, "\\0#{embeddedAttrs} ")}
     else
-      "<div #{embeddedAttrs}></div>"
+      {:safe, "<div #{embeddedAttrs}></div>"}
     end
   end
 end

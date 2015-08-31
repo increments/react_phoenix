@@ -8,7 +8,7 @@ defmodule ReactPhoenixTest.Utils do
   # end
 
   test "react_component should render wrapper with prerender: false" do
-    html = react_component "Hello", %{a: 1}, prerender: false
+    {:safe, html} = react_component "Hello", %{a: 1}, prerender: false
     assert (to_string html) == "<div data-react-class=\'Hello\' data-react-props=\'{\"a\":1}\'></div>"
   end
 
@@ -17,8 +17,7 @@ defmodule ReactPhoenixTest.Utils do
     var Hello = React.createClass({render: function(){return React.createElement('div', {}, "hello")}})
     """
 
-    html = react_component "Hello", %{a: 1}, prerender: true
-    IO.puts html
+    {:safe, html} = react_component "Hello", %{a: 1}, prerender: true
     assert (to_string html) != "<div data-react-class=\'Hello\' data-react-props=\'{\"a\":1}\' ></div>"
   end
 end
