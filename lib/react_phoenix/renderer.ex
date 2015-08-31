@@ -6,9 +6,4 @@ defmodule ReactPhoenix.Renderer do
     """
     result
   end
-
-  def load_as_javascript(code) do
-    ReactPhoenix.JSContext.eval code
-    nil
-  end
 end

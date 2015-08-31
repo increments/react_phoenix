@@ -1,18 +1,17 @@
 defmodule ReactPhoenix.Utils do
-  def react_component(name, props, %{prerender: false}) do
-    {:ok, strProps} = JSX.encode props
-    "<div data-react-class=\'#{name}\' data-react-props=\'#{strProps}\' >"
-    <> "</div>"
-  end
-
   def react_component(name, props) do
-    react_component(name, props, %{prerender: false})
+    react_component(name, props, prerender: false)
   end
 
-  def react_component(name, props, %{prerender: true}) do
+  def react_component(name, props, opts) do
     {:ok, strProps} = JSX.encode props
+
     "<div data-react-class=\'#{name}\' data-react-props=\'#{strProps}\' >"
-    <> ReactPhoenix.Renderer.render_component(name, props)
+    <> (if opts[:prerender] do
+        ReactPhoenix.Renderer.render_component(name, props)
+      else
+        ""
+      end)
     <> "</div>"
   end
 end

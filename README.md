@@ -4,6 +4,16 @@ Inspired by [reactjs/react-rails](https://github.com/reactjs/react-rails "reactj
 
 WIP: It is not ready to prerender in server side because of [this issue](https://github.com/strange/erlang-v8/issues/1 "Build failed on Mac · Issue #1 · strange/erlang-v8"). Now it only provides `react_component` utils.
 
+## TODO
+
+- [x] react_compoent prerender: false
+- [x] react_compoent
+- [ ] .js renderer
+- [ ] .jsx renderer
+- [ ] .jade renderer
+- [ ] Cache by filename
+- [ ] Reload renderer when template file changes
+
 ## Usage
 
 1. Add `{:react_phoenix, github: "mizchi/react_phoenix"}` to your deps in `mix.exs`.

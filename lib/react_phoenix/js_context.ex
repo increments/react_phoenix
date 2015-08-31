@@ -1,6 +1,17 @@
 defmodule ReactPhoenix.JSContext do
   use GenServer
 
+  def load_javascript(code) do
+    eval code
+    nil
+  end
+
+  def load_file(filename) do
+    eval File.read! filename
+    nil
+  end
+
+  # Internal APIs
   def eval(code) do
     GenServer.call(:v8context, {:eval, code})
   end

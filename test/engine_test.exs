@@ -29,7 +29,7 @@ defmodule ReactPhoenixTest do
   end
 
   test "render as prerender: true" do
-    ReactPhoenix.Renderer.load_as_javascript """
+    ReactPhoenix.JSContext.load_javascript """
     var Hello = React.createClass({render: function(){return React.createElement('div', {}, "hello")}})
     """
 
