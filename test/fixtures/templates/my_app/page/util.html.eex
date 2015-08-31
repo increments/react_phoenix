@@ -1,0 +1,3 @@
+<div>
+  <%= raw react_component "Hello", %{a: 1}, %{prerender: false} %>
+</div>
