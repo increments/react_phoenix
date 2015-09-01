@@ -78,3 +78,7 @@ You can take over server side state if it can.
 - [ ] .jade renderer for react-jade
 - [ ] Cache by filename
 - [ ] Reload renderer when template files change
+
+## Special Thanks
+
+[Chris McCord](https://github.com/chrismccord) and his [phoenix_haml](https://github.com/chrismccord/phoenix_haml) project for bootstraping the react_phoenix project.
