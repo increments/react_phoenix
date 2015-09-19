@@ -6,7 +6,7 @@ Inspired by [reactjs/react-rails](https://github.com/reactjs/react-rails "reactj
 
 ## Usage
 
-1. Add `{:react_phoenix, github: "mizchi/react_phoenix"}` to your deps in `mix.exs`.
+1. Add `{:react_phoenix, github: "increments/react_phoenix"}` to your deps in `mix.exs`.
 2. Import `ReactPhoenix.Utils` and call `react_component`
 
 page_view.ex
